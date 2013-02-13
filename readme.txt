@@ -3,8 +3,8 @@ Contributors: gopsdepth
 Donate link: http://satjapotport.co.nf/
 Tags: youtube,post
 Requires at least: 3.5
-Tested up to: 3.5
-Stable tag: 0.1.0
+Tested up to: 3.5.1
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,15 +13,22 @@ Simple youtube search include plug-in is a short-code plug-in that will help you
 == Description ==
 
 = Overview =
-Simple youtube search include plug-in is a short-code plug-in that will help you add youtube video with search terms. 
+Simple youtube search include plug-in is a short-code plug-in that will help you add youtube video with search terms.
 
 = How to use =
 Simple to use, you just add this short-code
-`[f2c_youtube_inc s="search terms"]`
-*** "s" attribute is required attribute.*
+`[f2c_youtube_inc s="search terms" static="no"]`
+*** 's' attribute is required attribute.*
+*** 'static="no"' value will force plugin don't update a youtube video on your post, that's mean it will be get new one every time.
+
+= Attributes =
+s      => search terms. Required. eg. s="batman return"
+static => indicate a static youtube video. Set "no" only for non-static youtube video. Default is 'yes'. eg. static="no"
+output => indicate an output. "shortcode" is youtube video or "url" is link string. Default is 'shortcode'. eg. output="url"
 
 = How it works =
 The plug-in will get your search terms form "s" attribute and send them to youtube search page then it retrieves first video link in search list. After it get the link, it will create a wordpress youtube short-code so you can use wordpress youtube short-code attributes such as width, height, etc.
+When your user see a content of post, plug-in will update your post with static youtube video embed tag.
 
 == Installation ==
 
@@ -43,8 +50,17 @@ Now, no question.
 
 == Changelog ==
 
-None.
+= 0.1.1 =
+* Bug fixed.
+* Improve youtube search method.
+* Add more attribites
+	=> "static" - Set it "no" to not save youtube on post. eg. [f2c_youtube_inc s="xxx" static="no"]
+	=> "output" - Set it "shortcode" for showing video(Default) or "url" for showing link to the youtube video.
+* Add function "f2c_youtube_simple_data" for developer. This function will return an array of id, title, link.
+* Automatically update shortcode to embed tag when content shown. This will save your youtube video as static.
 
 == Upgrade notice ==
 
-None.
+= 0.1.1 =
+In previous version, some search text can't retrieve a youtube video so I improve a search method.
+Moreover, youtube video change every time that it's shown so I make it to be static youtube video. 
