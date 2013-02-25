@@ -3,7 +3,7 @@
 Plugin Name: Simple youtube search include by gopsdepth
 Plugin URI: http://www.satjapotport.co.nf
 Description: Retreive first or value that is indicated in attribute to show as Youtube by text search. It use Wordpress shortcode to show so the youtube video will show with powerful embled. How to use: You just add [f2c_youtube_inc s="search terms"], that's all.
-Version: 0.1.1
+Version: 1.0.0
 Author: gopsdepth
 Author URI: http://www.satjapotport.co.nf
 */
@@ -190,3 +190,23 @@ function f2c_youtube_thecontent()
 	return $post->post_content;
 }
 add_action('the_content', 'f2c_youtube_thecontent', 1);
+
+/*
+ * Add button to Editor
+ */
+function _f2c_youtube_addbutton($buttons)
+{
+	$buttons[] = 'f2c_youtube_static_button';
+	$buttons[] = 'f2c_youtube_button';
+	return $buttons;
+}
+// Add a callback to add our button to the TinyMCE toolbar
+add_filter('mce_buttons', '_f2c_youtube_addbutton');
+
+//This callback registers our plug-in
+function _f2c_youtube_addmceplugin($plugin_array) {
+	$plugin_path = plugin_dir_url(__FILE__);
+	$plugin_array['f2c_youtube_inc'] = $plugin_path . 'shortcode.js';
+	return $plugin_array;
+}
+add_filter("mce_external_plugins", "_f2c_youtube_addmceplugin"); 
